@@ -54,14 +54,14 @@ AWK="$(command -v awk)" || {
   exit 1
 }
 
-if [ ! -f "$LOCK" ]; then
+if [[ ! -f "$LOCK" ]]; then
   echo "check-lock-sync: FATAL: no lockfile at $LOCK" >&2
   exit 1
 fi
 
 shopt -s nullglob
 mapfile -t WORKFLOWS < <(printf '%s\n' "$WF_DIR"/*.yml "$WF_DIR"/*.yaml | sort -u)
-if [ "${#WORKFLOWS[@]}" -eq 0 ]; then
+if [[ "${#WORKFLOWS[@]}" -eq 0 ]]; then
   echo "check-lock-sync: FATAL: no workflow files under $WF_DIR" >&2
   exit 1
 fi
